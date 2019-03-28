@@ -1,0 +1,22 @@
+syntax = "proto3";
+
+package tmcs_msg;
+
+message RPC{
+    int32 rpcId = 1;
+    RPCCode code = 2;
+    string message = 3;
+    oneof data {
+        string textData = 4;
+        
+    }
+}
+
+enum RPCCode{
+    Ping = 0;
+    Pong = 1;
+    LinkClicked = 2000;
+    ContactRequest = 2001;
+    ContactOnline = 2002;
+    ContactOffline = 2003;
+}

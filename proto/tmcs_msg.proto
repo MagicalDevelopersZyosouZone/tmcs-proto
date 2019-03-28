@@ -1,0 +1,72 @@
+syntax = "proto3";
+
+package tmcs_msg;
+
+import "tmcs_error.proto";
+import "tmcs_rpc.proto";
+
+message NewSession{
+    string pubkey = 1;
+    int64 lifeTime = 2;
+    bool group = 3;
+}
+
+message SignedMsg{
+    enum Type{
+        Message = 0;
+        Receipt = 1;
+        Error = 2;
+        Notification = 4;
+        RPC = 8;
+    }
+    int32 id = 1;
+    Type type = 2;
+    string receiver = 3;
+    string sender = 4;
+    // protobuf bytes of {MessagePack | ReceiptPack | Error(tmcs_error.proto) | RPC(tmcs_rpc.proto)}
+    bytes body = 5;
+    bytes sign = 6;
+}
+
+message MessagePack{
+    repeated Message msg = 1;
+}
+
+message Message{
+    string msgId = 1;
+    // PGP fingerprint of receiver
+    string receiver = 2;
+    int64 timestamp = 3;
+    // Message body encrypted with sender's private key
+    bytes encryptedMsg = 4;
+}
+
+message ReceiptPack{
+    repeated MsgReceipt receipts = 1;
+}
+
+message MsgReceipt{
+    string msgId = 1;
+    enum MsgState{
+        Lost = 0;
+        Received = 1;
+        Timeout = 2;
+        VerifyFailed = 4;
+    }
+    MsgState state = 2;
+}
+
+message ClientHandShake{
+    int32 clientVersion = 1;
+}
+
+message ServerHandShake{
+    int32 serverVersion = 1;
+    string token = 2;
+}
+
+message SignIn{
+    string fingerPrint = 1;
+    string token = 2;
+    bytes sign = 3;
+}

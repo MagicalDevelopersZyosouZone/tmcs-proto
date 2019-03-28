@@ -1,0 +1,18 @@
+syntax = "proto3";
+
+package tmcs_msg;
+
+message Error{
+    ErrorCode code = 1;
+    string message = 2;
+    string data = 3;
+}
+
+enum ErrorCode{
+    None = 0;
+    InvalidMessage = 1000;
+    MessageNotDelivered = 1001;
+    ReceiverUnknown = 1002;
+    VerifyError = 1003;
+    InvalidKey = 1004;
+}
