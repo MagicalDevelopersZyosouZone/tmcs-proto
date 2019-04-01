@@ -2,7 +2,7 @@
   "name": "tmcs-proto",
   "version": "1.0.0",
   "description": "Protobuf of TMCS.",
-  "main": "index.js",
+  "main": "./js/index.js",
   "scripts": {
     "build": "npm run build:js && npm run protoc:go",
     "build:js": "npx tsc && npm run protoc:js",
