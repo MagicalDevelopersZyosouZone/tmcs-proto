@@ -7,7 +7,7 @@
     "build": "npm run build:js && npm run protoc:go",
     "build:js": "npx tsc && npm run protoc:js",
     "protoc:js": "protoc --plugin=./node_modules/.bin/protoc-gen-ts --proto_path=./proto --js_out=import_style=commonjs,binary:./js --ts_out=./js ./proto/*.proto",
-    "protoc:go": "cd ./proto && protoc --proto_path=. --go_out=../go/ ./*.proto"
+    "protoc:go": "cd ./proto && protoc --proto_path=. --go_out=plugins=grpc:../go/ ./*.proto"
   },
   "keywords": [
     "tmcs",

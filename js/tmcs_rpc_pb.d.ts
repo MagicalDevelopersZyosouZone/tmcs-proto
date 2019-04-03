@@ -18,6 +18,13 @@ export class RPC extends jspb.Message {
   getTextdata(): string;
   setTextdata(value: string): void;
 
+  hasBindata(): boolean;
+  clearBindata(): void;
+  getBindata(): Uint8Array | string;
+  getBindata_asU8(): Uint8Array;
+  getBindata_asB64(): string;
+  setBindata(value: Uint8Array | string): void;
+
   getDataCase(): RPC.DataCase;
   serializeBinary(): Uint8Array;
   toObject(includeInstance?: boolean): RPC.AsObject;
@@ -35,11 +42,13 @@ export namespace RPC {
     code: RPCCode,
     message: string,
     textdata: string,
+    bindata: Uint8Array | string,
   }
 
   export enum DataCase {
     DATA_NOT_SET = 0,
     TEXTDATA = 4,
+    BINDATA = 5,
   }
 }
 

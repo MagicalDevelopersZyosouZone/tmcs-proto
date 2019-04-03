@@ -5,6 +5,7 @@ package tmcs_msg;
 import "tmcs_error.proto";
 import "tmcs_rpc.proto";
 
+
 message NewSession{
     string pubkey = 1;
     int64 lifeTime = 2;
@@ -33,7 +34,7 @@ message MessagePack{
 }
 
 message Message{
-    string msgId = 1;
+    int32 msgId = 1;
     // PGP fingerprint of receiver
     string receiver = 2;
     int64 timestamp = 3;
@@ -46,12 +47,13 @@ message ReceiptPack{
 }
 
 message MsgReceipt{
-    string msgId = 1;
+    int32 msgId = 1;
     enum MsgState{
         Lost = 0;
         Received = 1;
         Timeout = 2;
         VerifyFailed = 4;
+        Reject = 8;
     }
     MsgState state = 2;
 }
@@ -69,4 +71,9 @@ message SignIn{
     string fingerPrint = 1;
     string token = 2;
     bytes sign = 3;
+}
+
+message RPCResponse{
+
+    int32 errorCode = 1;
 }

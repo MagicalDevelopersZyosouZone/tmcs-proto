@@ -108,8 +108,8 @@ export namespace MessagePack {
 }
 
 export class Message extends jspb.Message {
-  getMsgid(): string;
-  setMsgid(value: string): void;
+  getMsgid(): number;
+  setMsgid(value: number): void;
 
   getReceiver(): string;
   setReceiver(value: string): void;
@@ -134,7 +134,7 @@ export class Message extends jspb.Message {
 
 export namespace Message {
   export type AsObject = {
-    msgid: string,
+    msgid: number,
     receiver: string,
     timestamp: number,
     encryptedmsg: Uint8Array | string,
@@ -164,8 +164,8 @@ export namespace ReceiptPack {
 }
 
 export class MsgReceipt extends jspb.Message {
-  getMsgid(): string;
-  setMsgid(value: string): void;
+  getMsgid(): number;
+  setMsgid(value: number): void;
 
   getState(): MsgReceipt.MsgState;
   setState(value: MsgReceipt.MsgState): void;
@@ -182,7 +182,7 @@ export class MsgReceipt extends jspb.Message {
 
 export namespace MsgReceipt {
   export type AsObject = {
-    msgid: string,
+    msgid: number,
     state: MsgReceipt.MsgState,
   }
 
@@ -191,6 +191,7 @@ export namespace MsgReceipt {
     RECEIVED = 1,
     TIMEOUT = 2,
     VERIFYFAILED = 4,
+    REJECT = 8,
   }
 }
 
@@ -265,6 +266,26 @@ export namespace SignIn {
     fingerprint: string,
     token: string,
     sign: Uint8Array | string,
+  }
+}
+
+export class RPCResponse extends jspb.Message {
+  getErrorcode(): number;
+  setErrorcode(value: number): void;
+
+  serializeBinary(): Uint8Array;
+  toObject(includeInstance?: boolean): RPCResponse.AsObject;
+  static toObject(includeInstance: boolean, msg: RPCResponse): RPCResponse.AsObject;
+  static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
+  static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
+  static serializeBinaryToWriter(message: RPCResponse, writer: jspb.BinaryWriter): void;
+  static deserializeBinary(bytes: Uint8Array): RPCResponse;
+  static deserializeBinaryFromReader(message: RPCResponse, reader: jspb.BinaryReader): RPCResponse;
+}
+
+export namespace RPCResponse {
+  export type AsObject = {
+    errorcode: number,
   }
 }
 

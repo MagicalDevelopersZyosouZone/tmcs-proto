@@ -8,7 +8,8 @@ message RPC{
     string message = 3;
     oneof data {
         string textData = 4;
-        
+        bytes binData = 5;
+
     }
 }
 

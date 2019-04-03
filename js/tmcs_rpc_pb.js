@@ -39,14 +39,15 @@ if (goog.DEBUG && !COMPILED) {
  * @private {!Array<!Array<number>>}
  * @const
  */
-proto.tmcs_msg.RPC.oneofGroups_ = [[4]];
+proto.tmcs_msg.RPC.oneofGroups_ = [[4,5]];
 
 /**
  * @enum {number}
  */
 proto.tmcs_msg.RPC.DataCase = {
   DATA_NOT_SET: 0,
-  TEXTDATA: 4
+  TEXTDATA: 4,
+  BINDATA: 5
 };
 
 /**
@@ -88,7 +89,8 @@ proto.tmcs_msg.RPC.toObject = function(includeInstance, msg) {
     rpcid: jspb.Message.getFieldWithDefault(msg, 1, 0),
     code: jspb.Message.getFieldWithDefault(msg, 2, 0),
     message: jspb.Message.getFieldWithDefault(msg, 3, ""),
-    textdata: jspb.Message.getFieldWithDefault(msg, 4, "")
+    textdata: jspb.Message.getFieldWithDefault(msg, 4, ""),
+    bindata: msg.getBindata_asB64()
   };
 
   if (includeInstance) {
@@ -140,6 +142,10 @@ proto.tmcs_msg.RPC.deserializeBinaryFromReader = function(msg, reader) {
     case 4:
       var value = /** @type {string} */ (reader.readString());
       msg.setTextdata(value);
+      break;
+    case 5:
+      var value = /** @type {!Uint8Array} */ (reader.readBytes());
+      msg.setBindata(value);
       break;
     default:
       reader.skipField();
@@ -195,6 +201,13 @@ proto.tmcs_msg.RPC.serializeBinaryToWriter = function(message, writer) {
   if (f != null) {
     writer.writeString(
       4,
+      f
+    );
+  }
+  f = /** @type {!(string|Uint8Array)} */ (jspb.Message.getField(message, 5));
+  if (f != null) {
+    writer.writeBytes(
+      5,
       f
     );
   }
@@ -272,6 +285,59 @@ proto.tmcs_msg.RPC.prototype.clearTextdata = function() {
  */
 proto.tmcs_msg.RPC.prototype.hasTextdata = function() {
   return jspb.Message.getField(this, 4) != null;
+};
+
+
+/**
+ * optional bytes binData = 5;
+ * @return {!(string|Uint8Array)}
+ */
+proto.tmcs_msg.RPC.prototype.getBindata = function() {
+  return /** @type {!(string|Uint8Array)} */ (jspb.Message.getFieldWithDefault(this, 5, ""));
+};
+
+
+/**
+ * optional bytes binData = 5;
+ * This is a type-conversion wrapper around `getBindata()`
+ * @return {string}
+ */
+proto.tmcs_msg.RPC.prototype.getBindata_asB64 = function() {
+  return /** @type {string} */ (jspb.Message.bytesAsB64(
+      this.getBindata()));
+};
+
+
+/**
+ * optional bytes binData = 5;
+ * Note that Uint8Array is not supported on all browsers.
+ * @see http://caniuse.com/Uint8Array
+ * This is a type-conversion wrapper around `getBindata()`
+ * @return {!Uint8Array}
+ */
+proto.tmcs_msg.RPC.prototype.getBindata_asU8 = function() {
+  return /** @type {!Uint8Array} */ (jspb.Message.bytesAsU8(
+      this.getBindata()));
+};
+
+
+/** @param {!(string|Uint8Array)} value */
+proto.tmcs_msg.RPC.prototype.setBindata = function(value) {
+  jspb.Message.setOneofField(this, 5, proto.tmcs_msg.RPC.oneofGroups_[0], value);
+};
+
+
+proto.tmcs_msg.RPC.prototype.clearBindata = function() {
+  jspb.Message.setOneofField(this, 5, proto.tmcs_msg.RPC.oneofGroups_[0], undefined);
+};
+
+
+/**
+ * Returns whether this field is set.
+ * @return {!boolean}
+ */
+proto.tmcs_msg.RPC.prototype.hasBindata = function() {
+  return jspb.Message.getField(this, 5) != null;
 };
 
 
