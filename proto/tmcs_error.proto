@@ -15,4 +15,5 @@ enum ErrorCode{
     ReceiverUnknown = 1002;
     VerifyError = 1003;
     InvalidKey = 1004;
+    InternalError = 5000;
 }
