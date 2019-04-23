@@ -49,11 +49,15 @@ message ReceiptPack{
 message MsgReceipt{
     int32 msgId = 1;
     enum MsgState{
-        Lost = 0;
-        Received = 1;
-        Timeout = 2;
-        VerifyFailed = 4;
-        Reject = 8;
+        Failed =        0x0;
+        Lost =          0x1;
+        Timeout =       0x2;
+        VerifyFailed =  0x4;
+        Reject =        0x8;
+        Pending =       0x40000;
+        Sent =          0x40001;
+        Delivered =     0x40002;
+        Received =      0x80000;
     }
     MsgState state = 2;
 }

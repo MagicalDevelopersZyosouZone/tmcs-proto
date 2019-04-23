@@ -187,11 +187,15 @@ export namespace MsgReceipt {
   }
 
   export enum MsgState {
-    LOST = 0,
-    RECEIVED = 1,
+    FAILED = 0,
+    LOST = 1,
     TIMEOUT = 2,
     VERIFYFAILED = 4,
     REJECT = 8,
+    PENDING = 262144,
+    SENT = 262145,
+    DELIVERED = 262146,
+    RECEIVED = 524288,
   }
 }
 
